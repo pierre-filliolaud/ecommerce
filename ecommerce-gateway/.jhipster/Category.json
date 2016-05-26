@@ -1,0 +1,22 @@
+{
+  "relationships": [
+    {
+      "relationshipId": 1,
+      "relationshipName": "subcategory",
+      "otherEntityName": "subCategory",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "category"
+    }
+  ],
+  "fields": [
+    {
+      "fieldId": 1,
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "changelogDate": "20160526204451",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no"
+}

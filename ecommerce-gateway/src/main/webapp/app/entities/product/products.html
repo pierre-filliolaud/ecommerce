@@ -1,0 +1,90 @@
+<div>
+    <h2>Products</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="product.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="hidden-xs" >
+                        Create new Product
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="Query">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.clear()">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th><span>Name</span></th>
+                    <th><span>Description</span></th>
+                    <th><span>Image</span></th>
+                    <th><span>Price</span></th>
+                    <th><span>Size</span></th>
+                    <th><span>Brand</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="product in vm.products track by product.id">
+                    <td><a ui-sref="product-detail({id:product.id})">{{product.id}}</a></td>
+                    <td>{{product.name}}</td>
+                    <td>{{product.description}}</td>
+                    <td>
+                        <a ng-if="product.image" ng-click="vm.openFile(product.imageContentType, product.image)">
+                            <img data-ng-src="{{'data:' + product.imageContentType + ';base64,' + product.image}}" style="max-height: 30px;"/>
+                        </a>
+                        <span ng-if="product.image">{{product.imageContentType}}, {{vm.byteSize(product.image)}}</span>
+                    </td>
+                    <td>{{product.price}}</td>
+                    <td translate="{{'gatewayApp.Size.' + product.size}}">{{product.size}}</td>
+                    <td>
+                        <a ui-sref="brand-detail({id:product.brand.id})">{{product.brand.brandName}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="product-detail({id:product.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="product.edit({id:product.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="product.delete({id:product.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

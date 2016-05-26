@@ -1,0 +1,51 @@
+{
+  "relationships": [
+    {
+      "relationshipId": 1,
+      "relationshipName": "subcategory",
+      "otherEntityName": "subCategory",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "product"
+    },
+    {
+      "relationshipId": 2,
+      "relationshipName": "brand",
+      "otherEntityName": "brand",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "brandName"
+    }
+  ],
+  "fields": [
+    {
+      "fieldId": 1,
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldId": 2,
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldId": 3,
+      "fieldName": "image",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldId": 4,
+      "fieldName": "price",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldId": 5,
+      "fieldName": "size",
+      "fieldType": "Size",
+      "fieldValues": "S,M,L,XL,XXL"
+    }
+  ],
+  "changelogDate": "20160526204453",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no"
+}

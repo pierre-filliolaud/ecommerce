@@ -1,0 +1,22 @@
+{
+  "relationships": [
+    {
+      "relationshipId": 1,
+      "relationshipName": "product",
+      "otherEntityName": "product",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "brand"
+    }
+  ],
+  "fields": [
+    {
+      "fieldId": 1,
+      "fieldName": "brandName",
+      "fieldType": "String"
+    }
+  ],
+  "changelogDate": "20160526204454",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no"
+}

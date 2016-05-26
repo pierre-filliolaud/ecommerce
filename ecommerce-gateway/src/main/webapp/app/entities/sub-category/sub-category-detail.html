@@ -1,0 +1,30 @@
+
+<div>
+    <h2><span>Sub Category</span> {{vm.subCategory.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{vm.subCategory.name}}</span>
+        </dd>
+        <dt><span>Alcohol</span></dt>
+        <dd>
+            <span>{{vm.subCategory.alcohol}}</span>
+        </dd>
+        <dt><span>Product</span></dt>
+        <dd>
+            <a ui-sref="product-detail({id:vm.subCategory.product.id})">{{vm.subCategory.product.name}}</a>
+        </dd>
+        <dt><span>Category</span></dt>
+        <dd>
+            <a ui-sref="category-detail({id:vm.subCategory.category.id})">{{vm.subCategory.category.name}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

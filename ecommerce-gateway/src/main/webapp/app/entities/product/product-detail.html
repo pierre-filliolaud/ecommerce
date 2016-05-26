@@ -1,0 +1,43 @@
+
+<div>
+    <h2><span>Product</span> {{vm.product.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{vm.product.name}}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+            <span>{{vm.product.description}}</span>
+        </dd>
+        <dt><span>Image</span></dt>
+        <dd>
+            <div ng-if="vm.product.image">
+                <a ng-click="vm.openFile(vm.product.imageContentType, vm.product.image)">
+                    <img data-ng-src="{{'data:' + vm.product.imageContentType + ';base64,' + vm.product.image}}" style="max-width: 100%;"/>
+                </a>
+                {{vm.product.imageContentType}}, {{vm.byteSize(vm.product.image)}}
+            </div>
+        </dd>
+        <dt><span>Price</span></dt>
+        <dd>
+            <span>{{vm.product.price}}</span>
+        </dd>
+        <dt><span>Size</span></dt>
+        <dd>
+            <span translate="{{'gatewayApp.Size.' + vm.product.size}}">{{vm.product.size}}</span>
+        </dd>
+        <dt><span>Brand</span></dt>
+        <dd>
+            <a ui-sref="brand-detail({id:vm.product.brand.id})">{{vm.product.brand.brandName}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>
