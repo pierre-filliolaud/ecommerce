@@ -1,0 +1,19 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "content",
+            "fieldType": "String"
+        }
+    ],
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "article",
+    "pagination": "no",
+    "microserviceName": "cms",
+    "searchEngine": "no"
+}
