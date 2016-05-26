@@ -1,0 +1,13 @@
+{
+  "generator-jhipster": {
+    "appsFolders": [
+      "ecommerce-cart",
+      "ecommerce-cms",
+      "ecommerce-gateway"
+    ],
+    "directoryPath": "../",
+    "useElk": true,
+    "adminPassword": "admin",
+    "jwtSecretKey": "b06c9ed78440f16b0f66b2bf567c6bdc9c735720"
+  }
+}
