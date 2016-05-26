@@ -1,0 +1,32 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "productId",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "price",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldName": "login",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160526205747",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "item",
+    "pagination": "no",
+    "microserviceName": "cart",
+    "searchEngine": "no"
+}

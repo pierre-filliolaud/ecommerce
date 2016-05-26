@@ -1,0 +1,26 @@
+
+<div>
+    <h2><span>Item</span> {{vm.item.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Product Id</span></dt>
+        <dd>
+            <span>{{vm.item.productId}}</span>
+        </dd>
+        <dt><span>Price</span></dt>
+        <dd>
+            <span>{{vm.item.price}}</span>
+        </dd>
+        <dt><span>Login</span></dt>
+        <dd>
+            <span>{{vm.item.login}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>
