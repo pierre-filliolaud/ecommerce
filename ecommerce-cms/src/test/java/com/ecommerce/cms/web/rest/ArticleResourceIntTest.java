@@ -19,6 +19,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -70,13 +71,13 @@ public class ArticleResourceIntTest {
 
     @Before
     public void initTest() {
-        articleRepository.deleteAll();
         article = new Article();
         article.setTitle(DEFAULT_TITLE);
         article.setContent(DEFAULT_CONTENT);
     }
 
     @Test
+    @Transactional
     public void createArticle() throws Exception {
         int databaseSizeBeforeCreate = articleRepository.findAll().size();
 
@@ -96,34 +97,37 @@ public class ArticleResourceIntTest {
     }
 
     @Test
+    @Transactional
     public void getAllArticles() throws Exception {
         // Initialize the database
-        articleRepository.save(article);
+        articleRepository.saveAndFlush(article);
 
         // Get all the articles
         restArticleMockMvc.perform(get("/api/articles?sort=id,desc"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.[*].id").value(hasItem(article.getId())))
+                .andExpect(jsonPath("$.[*].id").value(hasItem(article.getId().intValue())))
                 .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE.toString())))
                 .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())));
     }
 
     @Test
+    @Transactional
     public void getArticle() throws Exception {
         // Initialize the database
-        articleRepository.save(article);
+        articleRepository.saveAndFlush(article);
 
         // Get the article
         restArticleMockMvc.perform(get("/api/articles/{id}", article.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.id").value(article.getId()))
+            .andExpect(jsonPath("$.id").value(article.getId().intValue()))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE.toString()))
             .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT.toString()));
     }
 
     @Test
+    @Transactional
     public void getNonExistingArticle() throws Exception {
         // Get the article
         restArticleMockMvc.perform(get("/api/articles/{id}", Long.MAX_VALUE))
@@ -131,9 +135,10 @@ public class ArticleResourceIntTest {
     }
 
     @Test
+    @Transactional
     public void updateArticle() throws Exception {
         // Initialize the database
-        articleRepository.save(article);
+        articleRepository.saveAndFlush(article);
         int databaseSizeBeforeUpdate = articleRepository.findAll().size();
 
         // Update the article
@@ -156,9 +161,10 @@ public class ArticleResourceIntTest {
     }
 
     @Test
+    @Transactional
     public void deleteArticle() throws Exception {
         // Initialize the database
-        articleRepository.save(article);
+        articleRepository.saveAndFlush(article);
         int databaseSizeBeforeDelete = articleRepository.findAll().size();
 
         // Get the article

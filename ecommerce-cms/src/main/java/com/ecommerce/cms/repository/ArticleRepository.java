@@ -2,12 +2,14 @@ package com.ecommerce.cms.repository;
 
 import com.ecommerce.cms.domain.Article;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.*;
+
+import java.util.List;
 
 /**
- * Spring Data MongoDB repository for the Article entity.
+ * Spring Data JPA repository for the Article entity.
  */
 @SuppressWarnings("unused")
-public interface ArticleRepository extends MongoRepository<Article,String> {
+public interface ArticleRepository extends JpaRepository<Article,Long> {
 
 }

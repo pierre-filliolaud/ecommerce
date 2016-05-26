@@ -20,11 +20,24 @@ eureka:
 spring:
     application:
         name: cms
-    data:
-        mongodb:
-            host: localhost
-            port: 27117
-            database: cms
+    datasource:
+        url: jdbc:h2:mem:cms;DB_CLOSE_DELAY=-1
+        name:
+        username:
+        password:
+    jpa:
+        database-platform: com.ecommerce.cms.domain.util.FixedH2Dialect
+        database: H2
+        open-in-view: false
+        show_sql: true
+        hibernate:
+            ddl-auto: none
+            naming-strategy: org.springframework.boot.orm.jpa.hibernate.SpringNamingStrategy
+        properties:
+            hibernate.cache.use_second_level_cache: false
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: true
+            hibernate.hbm2ddl.auto: validate
     mail:
         host: localhost
     mvc:
@@ -56,7 +69,7 @@ jhipster:
     security:
         authentication:
             jwt:
-                secret: 890c1333cc90ec05f3c088eb07e8a0b3e057cd6c
+                secret: 47379e8f638095364998ad300d04cbca13429ee2
                 # Token is valid 24 hours
                 tokenValidityInSeconds: 86400
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration

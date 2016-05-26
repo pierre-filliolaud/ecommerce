@@ -28,10 +28,25 @@ spring:
             enabled: true
         livereload:
             enabled: false # we use gulp + BrowserSync for livereload
-    data:
-        mongodb:
-            uri: mongodb://localhost:27017
-            database: cms
+    datasource:
+        url: jdbc:h2:mem:cms;DB_CLOSE_DELAY=-1
+        name:
+        username: cms
+        password:
+    h2:
+        console:
+            enabled: false
+    jpa:
+        database-platform: com.ecommerce.cms.domain.util.FixedH2Dialect
+        database: H2
+        show_sql: true
+        properties:
+            hibernate.cache.use_second_level_cache: true
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: true
+            hibernate.cache.region.factory_class: com.ecommerce.cms.config.hazelcast.HazelcastCacheRegionFactory
+            hibernate.cache.use_minimal_puts: true
+            hibernate.cache.hazelcast.use_lite_member: true
     mail:
         host: localhost
     messages:
@@ -50,6 +65,10 @@ server:
 # ===================================================================
 
 jhipster:
+    cache: # Hibernate 2nd level cache, used by CacheConfiguration
+        timeToLiveSeconds: 3600
+        hazelcast:
+            backupCount: 1
     security:
         authentication:
             jwt:

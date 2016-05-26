@@ -101,7 +101,7 @@ public class ArticleResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Article> getArticle(@PathVariable String id) {
+    public ResponseEntity<Article> getArticle(@PathVariable Long id) {
         log.debug("REST request to get Article : {}", id);
         Article article = articleRepository.findOne(id);
         return Optional.ofNullable(article)
@@ -121,7 +121,7 @@ public class ArticleResource {
         method = RequestMethod.DELETE,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Void> deleteArticle(@PathVariable String id) {
+    public ResponseEntity<Void> deleteArticle(@PathVariable Long id) {
         log.debug("REST request to delete Article : {}", id);
         articleRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("article", id.toString())).build();

@@ -3,6 +3,7 @@ package com.ecommerce.cms.config;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.servlet.InstrumentedFilter;
 import com.codahale.metrics.servlets.MetricsServlet;
+import com.hazelcast.core.HazelcastInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,10 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
     @Autowired(required = false)
     private MetricRegistry metricRegistry;
 
+    // Hazelcast instance is injected to force its initialization before the Servlet filter uses it.
+    @Inject
+    private HazelcastInstance hazelcastInstance;
+
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         if (env.getActiveProfiles().length != 0) {
@@ -46,6 +51,9 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
         }
         EnumSet<DispatcherType> disps = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.ASYNC);
         initMetrics(servletContext, disps);
+        if (env.acceptsProfiles(Constants.SPRING_PROFILE_DEVELOPMENT)) {
+            initH2Console(servletContext);
+        }
         log.info("Web application fully configured");
     }
 
@@ -98,5 +106,16 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
         source.registerCorsConfiguration("/v2/api-docs", config);
         source.registerCorsConfiguration("/oauth/**", config);
         return new CorsFilter(source);
+    }
+
+    /**
+     * Initializes H2 console.
+     */
+    private void initH2Console(ServletContext servletContext) {
+        log.debug("Initialize H2 console");
+        ServletRegistration.Dynamic h2ConsoleServlet = servletContext.addServlet("H2Console", new org.h2.server.web.WebServlet());
+        h2ConsoleServlet.addMapping("/h2-console/*");
+        h2ConsoleServlet.setInitParameter("-properties", "src/main/resources/");
+        h2ConsoleServlet.setLoadOnStartup(1);
     }
 }

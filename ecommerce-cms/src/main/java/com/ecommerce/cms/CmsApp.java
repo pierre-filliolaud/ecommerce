@@ -25,7 +25,7 @@ import java.util.Map;
 
 @ComponentScan
 @EnableAutoConfiguration(exclude = { MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class })
-@EnableConfigurationProperties({ JHipsterProperties.class })
+@EnableConfigurationProperties({ JHipsterProperties.class, LiquibaseProperties.class })
 @EnableEurekaClient
 public class CmsApp {
 

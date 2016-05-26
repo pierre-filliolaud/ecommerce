@@ -28,10 +28,28 @@ spring:
             enabled: false
         livereload:
             enabled: false
-    data:
-        mongodb:
-            uri: mongodb://localhost:27017
-            database: cms
+    datasource:
+        url: jdbc:mysql://localhost:3306/cms?useUnicode=true&characterEncoding=utf8&useSSL=false
+        name:
+        username: root
+        password:
+        hikari:
+            data-source-properties:
+                cachePrepStmts: true
+                prepStmtCacheSize: 250
+                prepStmtCacheSqlLimit: 2048
+                useServerPrepStmts: true
+    jpa:
+        database-platform: org.hibernate.dialect.MySQLInnoDBDialect
+        database: MYSQL
+        show_sql: false
+        properties:
+            hibernate.cache.use_second_level_cache: true
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: false
+            hibernate.cache.region.factory_class: com.ecommerce.cms.config.hazelcast.HazelcastCacheRegionFactory
+            hibernate.cache.use_minimal_puts: true
+            hibernate.cache.hazelcast.use_lite_member: true
     mail:
         host: localhost
         port: 25
@@ -58,10 +76,14 @@ jhipster:
     http:
         cache: # Used by the CachingHttpHeadersFilter
             timeToLiveInDays: 1461
+    cache: # Hibernate 2nd level cache, used by CacheConfiguration
+        timeToLiveSeconds: 3600
+        hazelcast:
+            backupCount: 1
     security:
         authentication:
             jwt:
-                secret: 890c1333cc90ec05f3c088eb07e8a0b3e057cd6c
+                secret: 47379e8f638095364998ad300d04cbca13429ee2
                 # Token is valid 24 hours
                 tokenValidityInSeconds: 86400
     mail: # specific JHipster mail property, for standard properties see MailProperties
