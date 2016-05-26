@@ -1,0 +1,10 @@
+version: '2'
+services:
+    gateway-elasticsearch:
+        container_name: gateway-elasticsearch
+        image: elasticsearch:1.7.5
+        # volumes:
+        #     - ~/volumes/jhipster/gateway/elasticsearch/:/usr/share/elasticsearch/data/
+        ports:
+            - 9200:9200
+            - 9300:9300

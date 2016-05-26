@@ -1,0 +1,32 @@
+version: '2'
+services:
+    gateway-cassandra:
+        container_name: gateway-cassandra
+        image: cassandra:2.2.5
+        # volumes:
+        #     - ~/volumes/jhipster/gateway/cassandra/:/var/lib/cassandra/data
+        ports:
+            - 7000:7000
+            - 7001:7001
+            - 7199:7199
+            - 9042:9042
+            - 9160:9160
+    gateway-cassandra-node:
+        image: cassandra:2.2.5
+        links:
+            - gateway-cassandra:seed
+        environment:
+            - CASSANDRA_SEEDS=seed
+    gateway-cassandra-migration:
+        container_name: gateway-cassandra-migration
+        links:
+            - gateway-cassandra
+        environment:
+            - CASSANDRA_CONTACT_POINT=gateway-cassandra
+            - USER=docker-cassandra-migration
+            # - DEBUG_LOG=1 ## uncomment to show debug logs in the migration
+        build:
+            context: .
+            dockerfile: cassandra/Cassandra.Dockerfile
+        volumes:
+            - ../resources/config/cql:/cql:ro

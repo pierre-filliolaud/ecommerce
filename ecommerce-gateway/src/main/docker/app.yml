@@ -1,0 +1,34 @@
+version: '2'
+services:
+    gateway-app:
+        image: gateway
+        external_links:
+            - gateway-mysql:mysql
+            # Uncomment to have Cassandra working with the gateway
+            # - gateway-cassandra:cassandra
+            - gateway-elasticsearch:elasticsearch
+            - jhipster-registry:registry
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod
+            - SPRING_CLOUD_CONFIG_URI=http://admin:admin@registry:8761/config
+            - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/gateway?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - SPRING_DATA_CASSANDRA_CONTACTPOINTS=cassandra
+            - SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=elasticsearch:9300
+        ports:
+            - 8080:8080
+    gateway-mysql:
+        extends:
+            file: mysql.yml
+            service: gateway-mysql
+        # Uncomment to have Cassandra working with the gateway
+        # extends:
+        #     file: cassandra-cluster.yml
+        #     service: gateway-cassandra
+    gateway-elasticsearch:
+        extends:
+            file: elasticsearch.yml
+            service: gateway-elasticsearch
+    jhipster-registry:
+        extends:
+            file: jhipster-registry.yml
+            service: jhipster-registry
