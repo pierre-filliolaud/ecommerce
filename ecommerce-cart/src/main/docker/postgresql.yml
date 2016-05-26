@@ -1,0 +1,12 @@
+version: '2'
+services:
+    cart-postgresql:
+        container_name: cart-postgresql
+        image: postgres:9.5.1
+        # volumes:
+        #     - ~/volumes/jhipster/cart/postgresql/:/var/lib/postgresql/
+        environment:
+            - POSTGRES_USER=cart
+            - POSTGRES_PASSWORD=
+        ports:
+            - 5432:5432
