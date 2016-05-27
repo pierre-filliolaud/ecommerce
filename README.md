@@ -32,6 +32,11 @@ until finished
 
 End with an example of getting some data out of the system or using it for a little demo
 
+## Architecture
+
+![alt text][architecture]
+
+
 ## Running the tests
 
 Explain how to run the automated tests for this system
@@ -85,3 +90,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Hat tip to anyone who's code was used
 * Inspiration
 * etc
+
+[architecture]: http://jhipster.github.io/images/microservices_architecture_1.png "Architecture"
+
